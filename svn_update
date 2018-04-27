@@ -1,0 +1,13 @@
+#!/bin/sh
+echo "-----  -----"
+echo "----- Update all svn folder in ${1} -----"
+find $1 -name .svn | while read f
+do
+    if [ -d $f ]; then
+        #echo ">" $f
+        parent=`echo $f | sed 's/.svn//'`   # separate the tail .svn to get then folder path
+        #echo ">" $parent
+        svn cleanup $parent
+	svn update $parent --username hvcong --password KingKong@94
+    fi
+done
